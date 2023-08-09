@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/modal/css/style.css">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
@@ -316,13 +317,74 @@
 					Whether you’re updating your current customized packaging in Philippines or launching a new product, it’s never been easier to stand out! Customize your own pouch in every way you can imagine: choose the size, type of pouch and any design you want
 					</p>
 					<div class="mbr-section-btn align-left mt-3">
-						<a class="btn btn-success-outline display-7" href="https://mobiri.se">Get started</a>
+						<!-- Modal Trigger Button -->
+                    <a class="btn btn-success-outline display-7" id="openQuoteModalBtn">Request a Quote</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+
+	<!-- Modal -->
+<div id="quoteModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <h2>Request a Quote</h2>
+        <form action="send_email.php" method="post">
+            <!-- Other input fields here -->
+            <div class="input-box">
+                <input type="email" id="senderEmail" name="senderEmail" required>
+                <span class="placeholder">Your Email</span>
+            </div>
+            <div class="input-box">
+                <input type="text" id="customerName" name="customerName" required>
+                <span class="placeholder">Customer Name</span>
+            </div>
+            <div class="input-box">
+                <input type="tel" id="contactNumber" name="contactNumber" required>
+                <span class="placeholder">Contact Number</span>
+            </div>
+            <div class="input-box">
+                <input type="text" id="pouchType" name="pouchType" required>
+                <span class="placeholder">Type of Pouch</span>
+            </div>
+            <div class="input-box">
+                <input type="text" id="materialType" name="materialType" required>
+                <span class="placeholder">Type of Material</span>
+            </div>
+            <div class="input-box">
+                <input type="text" id="thickness" name="thickness" required>
+                <span class="placeholder">Thickness</span>
+            </div>
+            <div class="input-box">
+                <input type="text" id="size" name="size" required>
+                <span class="placeholder">Size (Width x Height)</span>
+            </div>
+            <div class="input-box">
+                <input type="number" id="orderQuantity" name="orderQuantity" required>
+                <span class="placeholder">Order Quantity</span>
+            </div>
+            <div class="input-box check-design">
+                <div class="d-flex align-items-center">
+                    <label class="form-check-label mr-2" for="haveDesignCheckbox">Have a design?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="haveDesignCheckbox" onchange="toggleFileUpload()">
+                    </div>
+                </div>
+            </div>                       
+            <div class="input-box" id="fileUploadBox" style="display: none;">
+                <input type="file" id="printDesign" name="printDesign">
+                <span class="placeholder">Upload Print Design</span>
+            </div>
+            <textarea id="tableContent" name="tableContent" style="display: none;"></textarea>
+            <button type="submit" class="custom-btn custom-btn-primary" >Submit</button>
+        </form>
+    </div>
+</div>
+
+
 
 <section data-bs-version="5.1" class="gallery1 mbr-gallery cid-tMkr0vToy5" id="gallery01-1g">
     
@@ -815,7 +877,7 @@
                             <input type="tel" name="phone" placeholder="Phone" data-form-field="phone" class="form-control" value="" id="phone-form7-1a">
                         </div>
                         <div class="col-auto mbr-section-btn align-center">
-                            <button type="submit" class="btn btn-primary display-4">Submit</button>
+                            <button type="submit" class="">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -888,8 +950,62 @@
   <script src="assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
   <script src="assets/theme/js/script.js"></script>
   <script src="assets/formoid/formoid.min.js"></script>
-  
-  
-  
+ 
+
+
+  <style>
+
+  </style>
+
+  <script>
+   
+
+   const openModalBtn = document.getElementById('openQuoteModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const quoteModal = document.getElementById('quoteModal');
+
+openModalBtn.addEventListener('click', () => {
+    quoteModal.style.display = 'block';
+});
+
+closeModalBtn.addEventListener('click', () => {
+    quoteModal.style.display = 'none';
+});
+
+quoteModal.addEventListener('click', (event) => {
+    if (event.target === quoteModal) {
+        quoteModal.style.display = 'none';
+    }
+});
+
+
+function toggleFileUpload() {
+            const fileUploadBox = document.getElementById("fileUploadBox");
+            const haveDesignCheckbox = document.getElementById("haveDesignCheckbox");
+            
+            if (haveDesignCheckbox.checked) {
+                fileUploadBox.style.display = "block";
+            } else {
+                fileUploadBox.style.display = "none";
+            }
+        }
+
+
+
+
+document.getElementById("closeModalBtn").addEventListener("click", function() {
+    document.getElementById("quoteModal").style.display = "none";
+});
+
+function sanitizeInput(input) {
+    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+
+
+        
+
+  </script>
+
 </body>
 </html>
