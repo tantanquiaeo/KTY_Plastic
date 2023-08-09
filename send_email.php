@@ -1,4 +1,9 @@
 <?php
+
+require 'lib\PHPMailer-master\src\PHPMailer.php';
+require 'lib\PHPMailer-master\src\SMTP.php';
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Capture sender's email from the form data
     $senderEmail = $_POST['senderEmail'];
