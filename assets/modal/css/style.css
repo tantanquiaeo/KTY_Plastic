@@ -91,10 +91,10 @@ button[type="submit"]:hover {
     background-color: #2e84df;
 }
 
-/* Media query for responsiveness */
 @media screen and (max-width: 600px) {
     .modal-content {
-        margin: 50px;
+        margin: auto; /* Add 'auto' to horizontally center the modal */
+        margin-top: 50px;
         padding: 15px;
         max-width: 90%;
     }
